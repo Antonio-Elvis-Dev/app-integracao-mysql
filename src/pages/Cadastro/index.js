@@ -14,24 +14,30 @@ export default function Cadastro({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  async function registerUser() {
-
-    let reqs = await fetch(config.urlRootNode + "create", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nameUser: user,
-        passwordUser: password,
-        emailUser: email,
-      }),
+  async function registerUser()
+{
+    let reqs = await fetch(config.urlRootNode+'create',{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            nameUser: user,
+            passwordUser: password,
+            emailUser: email
+        })
     });
-  }
+    let ress=await reqs.json();
+    setMessage(ress);
+}
+  
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.areaForm}>
+
         <TextInput
           style={styles.form}
           placeholder="Nome"
@@ -55,6 +61,7 @@ export default function Cadastro({ navigation }) {
       </View>
 
       <View style={{ flexDirection: "row", justifyContent: "center" }}>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Home")}

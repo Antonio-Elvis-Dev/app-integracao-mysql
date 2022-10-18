@@ -1,30 +1,31 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+//Constantes
+const express=require('express');
+const bodyParser=require('body-parser');
+// const mercadopago=require('mercadopago');
+const cors=require('cors');
 
-const cors = require("cors");
-const model = require("./models/");
-
-let app = express();
-
+let app=express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// ROUTES
-app.post("/create", async (req, res) => {
-  // let reqs = await model.User.create({
-  //   'name': req.body.nameUser,
-  //   'password': req.body.passwordUser,
-  //   'email': req.body.emailUser,
-  //   'balance': 1000,
-  //   'createdAt': new Date(),
-  //   'updatedAt': new Date(),
-  // });
-  console.log(req.body.nameUser);
+//Routes
+app.post('/create',async(req,res)=>{
+    let reqs = await model.User.create({
+        'name':req.body.nameUser,
+        'password':req.body.passwordUser,
+        'email':req.body.emailUser,
+        'balance':1000,
+        'createdAt':new Date(),
+        'updatedAt':new Date()
+    });
+    if(reqs){
+        res.send(JSON.stringify('O usuário foi cadastrado com sucesso!'));
+    }
 });
 
-// STARTER SERVER
-let port = process.env.PORT || 3000;
-app.listen(port, (req, res) => {
-  console.log("Server Rodadando");
+//Start server
+let port=process.env.PORT || 3000;
+app.listen(port,(req,res)=>{
+    console.log('Servidor Rodando');
 });
