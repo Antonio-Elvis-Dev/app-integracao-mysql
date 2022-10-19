@@ -23,14 +23,22 @@ export default function Cadastro({ navigation }) {
             'Content-Type':'application/json'
         },
         body: JSON.stringify({
-            nameUser: user,
-            passwordUser: password,
-            emailUser: email
+            "nameUser":"user"
         })
-    });
-    let ress=await reqs.json();
-    setMessage(ress);
-}
+    })
+    .then((response)=>response.text())
+    .then((responseData) => {
+      AlertIOS.alert(
+          "POST Response",
+          "Response Body -> " + responseData
+      )
+    })
+       };
+
+    // let ress=await reqs.json();
+    // setMessage(ress);
+      
+
   
 
   
